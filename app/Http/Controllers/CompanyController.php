@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 
 class CompanyController extends Controller
 {
+    // Get all Companies
     public function all() { 
         return DB::table('company AS COM')
             ->join('country AS COU', 'COM.id_country', '=', 'COU.id')
@@ -21,6 +22,7 @@ class CompanyController extends Controller
             )->get();
     }
 
+    // Create new Company
     public function store(Request $request) {
         $query = DB::table('company')->insert(
             [
@@ -41,6 +43,7 @@ class CompanyController extends Controller
         }
     }
 
+    // Delete Company
     public function delete(Request $request) {
         $query = DB::table('company')
             ->where('NIT', $request->NIT)

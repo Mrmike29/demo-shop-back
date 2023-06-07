@@ -13,9 +13,8 @@ class LoginController extends Controller
      * @return void
      */
 
+     // Get user for login
     public function getUser(Request $request) { // fetch all todos
-        
-        // print_r(Crypt::encrypt($request->password));
         $user = DB::table('user')
             ->where('email', $request->email)
             ->where('password', sha1($request->password))
@@ -29,7 +28,7 @@ class LoginController extends Controller
         return response()->json(['success' => false]);
     }
      
-
+    // Create new User
     public function store(Request $request) { // fetch all todos
         $id = DB::table('user')->insertGetId(
             [
@@ -47,6 +46,4 @@ class LoginController extends Controller
             return response()->json(['success' => true, 'user' => ['id' => $id]]);
         }
     }
-
-    //
 }

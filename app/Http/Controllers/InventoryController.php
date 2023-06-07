@@ -9,6 +9,7 @@ use PHPMailer\PHPMailer\Exception;
 
 class InventoryController extends Controller
 {
+    // Get Products Inventory
     public function all() {
         return DB::table('product AS PRO')
             ->leftJoin('company AS COM', 'PRO.id_company', '=', 'COM.NIT')
@@ -23,6 +24,7 @@ class InventoryController extends Controller
             )->get();
     }
 
+    // Send email whit PDF
     public function send(Request $request) {
         $sender = 'mrmike981229@gmail.com';
         $senderName = 'Admin';
@@ -75,9 +77,3 @@ class InventoryController extends Controller
         }
     }
 }
-
-//yY#EgR1{
-    // SMTP Username:
-    // 
-    // SMTP Password:
-    // 

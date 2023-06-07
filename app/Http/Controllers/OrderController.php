@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
 {
+    // Get all Orders or one by id
     public function all(Request $request) {
         $orders = DB::table('order AS ORD')
             ->leftJoin('order_product AS OP', 'OP.id_order', '=', 'ORD.id')
@@ -29,6 +30,7 @@ class OrderController extends Controller
         return $orders;
     }
 
+    // Create new Order
     public function store(Request $request) {
         $array = json_decode($request->cartData, true);
         $oPData = [];

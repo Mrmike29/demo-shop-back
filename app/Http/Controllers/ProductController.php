@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
+    // Get all products or one by id
     public function all(Request $request) {
         $prods = DB::table('product AS PRO')
             ->leftJoin('product_category AS PC', 'PC.id_product', '=', 'PRO.id')
@@ -30,6 +31,7 @@ class ProductController extends Controller
         return $prods;
     }
 
+    // Create new Product
     public function store(Request $request) {
         $id = DB::table('product')->insertGetId(
             [
@@ -56,6 +58,7 @@ class ProductController extends Controller
         }
     }
 
+    // Delete Product
     public function delete(Request $request) {
         $query = DB::table('product')
             ->where('id', $request->id)
