@@ -1,24 +1,21 @@
-# Lumen PHP Framework
+# Project Installation
 
-[![Build Status](https://travis-ci.org/laravel/lumen-framework.svg)](https://travis-ci.org/laravel/lumen-framework)
-[![Total Downloads](https://img.shields.io/packagist/dt/laravel/lumen-framework)](https://packagist.org/packages/laravel/lumen-framework)
-[![Latest Stable Version](https://img.shields.io/packagist/v/laravel/lumen-framework)](https://packagist.org/packages/laravel/lumen-framework)
-[![License](https://img.shields.io/packagist/l/laravel/lumen)](https://packagist.org/packages/laravel/lumen-framework)
+Download project.
+### `git clone https://github.com/Mrmike29/demo-shop-back.git`
 
-Laravel Lumen is a stunningly fast PHP micro-framework for building web applications with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Lumen attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as routing, database abstraction, queueing, and caching.
+Rename .env.example to .env (My DB port is 3307)
 
-## Official Documentation
+Execute your DB manager (XAMPP in my case)
 
-Documentation for the framework can be found on the [Lumen website](https://lumen.laravel.com/docs).
+Install database webshop.sql located in main directory
 
-## Contributing
+Execute following command.
+### `composer install`
 
-Thank you for considering contributing to Lumen! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+# Run project
+### php -S localhost:8000 -t public
 
-## Security Vulnerabilities
+# Admin Credentials
+User: michaelorejuelaramirez@gmail.com
 
-If you discover a security vulnerability within Lumen, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Lumen framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Pass: Password#1
