@@ -39,3 +39,5 @@ $router->get('/getCountries', 'CountryController@all');
 $router->get('/getCategories', 'CategoryController@all');
 
 // Order
+$router->get('/getOrders', 'OrderController@all');
+$router->post('/createOrder', 'OrderController@store');
