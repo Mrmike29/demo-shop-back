@@ -48,7 +48,7 @@ class InventoryController extends Controller
         $pdf = $request->file('pdf');
 
         // Save the PDF to a temporary file on the server
-        $pdfPath = 'temp\pdf.pdf';
+        $pdfPath = 'temp/pdf.pdf';
         $pdf->move(public_path('temp'), $pdfPath);
         try {
             $mail->isSMTP();
