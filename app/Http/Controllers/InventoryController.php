@@ -12,16 +12,18 @@ class InventoryController extends Controller
     public function all() {
         return DB::table('product AS PRO')
             ->leftJoin('company AS COM', 'PRO.id_company', '=', 'COM.NIT')
+            ->leftJoin('country AS COU', 'COM.id_country', '=', 'COU.id')
             ->where('PRO.state', 'Active')
             ->select(
                 'PRO.id',
                 'PRO.name',
                 'PRO.stock',
-                'COM.name AS company'
+                'COM.name AS company',
+                'COU.local-currency AS currency' 
             )->get();
     }
 
-    public function send() {
+    public function send(Request $request) {
         $sender = 'mrmike981229@gmail.com';
         $senderName = 'Admin';
 
@@ -41,6 +43,11 @@ class InventoryController extends Controller
 
         $mail = new PHPMailer(true);
 
+        $pdf = $request->file('pdf');
+
+        // Save the PDF to a temporary file on the server
+        $pdfPath = 'temp\pdf.pdf';
+        $pdf->move(public_path('temp'), $pdfPath);
         try {
             $mail->isSMTP();
             $mail->setFrom($sender, $senderName);
@@ -57,6 +64,7 @@ class InventoryController extends Controller
             $mail->Subject = $subject;
             $mail->Body = $bodyHtml;
             $mail->AltBody = $bodyText;
+            $mail->addAttachment(public_path($pdfPath), 'pdf.pdf');
             $mail->send();
 
             echo "Email send", PHP_EOL;

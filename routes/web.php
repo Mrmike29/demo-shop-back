@@ -19,7 +19,7 @@ $router->post('/signup', 'LoginController@store');
 
 // Inventory
 $router->get('/getInventory', 'InventoryController@all');
-$router->get('/send', 'InventoryController@send');
+$router->post('/send', 'InventoryController@send');
 
 // Company
 $router->get('/getCompanies', 'CompanyController@all');
