@@ -69,7 +69,7 @@ class InventoryController extends Controller
             $mail->addAttachment(public_path($pdfPath), 'pdf.pdf');
             $mail->send();
 
-            echo "Email send", PHP_EOL;
+            return response()->json(['success' => true, 'message' => 'Email send']);
         } catch (phpmailerExceoption $e) {
             echo $e->errorMessage();
         } catch (Exception $e) {
