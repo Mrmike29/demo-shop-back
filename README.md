@@ -13,11 +13,11 @@ Execute following command.
 ### `composer install`
 
 # Run project
-### php -S localhost:8000 -t public
+### `php -S localhost:8000 -t public`
 
 
 # Test project
-### composer test
+### `composer test`
 
 # Admin Credentials
 User: michaelorejuelaramirez@gmail.com
