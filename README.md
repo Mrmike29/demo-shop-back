@@ -15,6 +15,10 @@ Execute following command.
 # Run project
 ### php -S localhost:8000 -t public
 
+
+# Test project
+### composer test
+
 # Admin Credentials
 User: michaelorejuelaramirez@gmail.com
 
