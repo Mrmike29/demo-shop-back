@@ -36,32 +36,36 @@ class ProductController extends Controller
 
     // Create new Product
     public function store(Request $request) {
-        $array = $request->category;
-        $cPData = [];
+        try {
+            $array = $request->category;
+            $cPData = [];
 
-        $id = DB::table('product')->insertGetId(
-            [
-                'id_company' => $request->company,
-                'name' => $request->name,
-                'description' => $request->description,
-                'stock' => $request->stock,
-                'price' => $request->price,
-                'state' => 'Active'
-            ]
-        );
-
-        if ($id) {
-            foreach ($array as $value) {
-                if(isset($value['id'])) {
-                    array_push($cPData, ['id_category' => $value['id'], 'id_product' => $id ]);
+            $id = DB::table('product')->insertGetId(
+                [
+                    'id_company' => $request->company,
+                    'name' => $request->name,
+                    'description' => $request->description,
+                    'stock' => $request->stock,
+                    'price' => $request->price,
+                    'state' => 'Active'
+                ]
+            );
+    
+            if ($id) {
+                foreach ($array as $value) {
+                    if(isset($value['id'])) {
+                        array_push($cPData, ['id_category' => $value['id'], 'id_product' => $id ]);
+                    }
+                }
+    
+                $query = DB::table('product_category')->insert($cPData);
+    
+                if ($query) {
+                    return response()->json(['success' => true, 'product' => ['id' => $id]]);
                 }
             }
-
-            $query = DB::table('product_category')->insert($cPData);
-
-            if ($query) {
-                return response()->json(['success' => true, 'product' => ['id' => $id]]);
-            }
+        } catch (\Throwable $th) {
+            print_r($th->getMessage());
         }
     }
 

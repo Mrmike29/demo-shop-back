@@ -30,20 +30,24 @@ class LoginController extends Controller
      
     // Create new User
     public function store(Request $request) { // fetch all todos
-        $id = DB::table('user')->insertGetId(
-            [
-                'id_rol' => 2,
-                'id_country' => $request->country,
-                'name' => $request->name,
-                'last_name' => $request->last_name,
-                'email' => $request->email,
-                'cell_phone' => $request->cell_phone,
-                'password' => sha1($request->password)
-            ]
-        );
+        try {
+            $id = DB::table('user')->insertGetId(
+                [
+                    'id_rol' => 2,
+                    'id_country' => $request->country,
+                    'name' => $request->name,
+                    'last_name' => $request->last_name,
+                    'email' => $request->email,
+                    'cell_phone' => $request->cell_phone,
+                    'password' => sha1($request->password)
+                ]
+            );
 
-        if ($id) {
-            return response()->json(['success' => true, 'user' => ['id' => $id]]);
+            if ($id) {
+                return response()->json(['success' => true, 'user' => ['id' => $id]]);
+            }
+        } catch (\Throwable $th) {
+            print_r($th->getMessage());
         }
     }
 }

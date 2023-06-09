@@ -32,38 +32,42 @@ class OrderController extends Controller
 
     // Create new Order
     public function store(Request $request) {
-        $array = json_decode($request->cartData, true);
-        $oPData = [];
-        
-        $number = 'ORD-' . $request->idUser . date("Ymdhis");
-        $id = DB::table('order')->insertGetId(
-            [
-                'id_user' => $request->idUser,
-                'number' => $number
-            ]
-        );
+        try {
+            $array = json_decode($request->cartData, true);
+            $oPData = [];
+            
+            $number = 'ORD-' . $request->idUser . date("Ymdhis");
+            $id = DB::table('order')->insertGetId(
+                [
+                    'id_user' => $request->idUser,
+                    'number' => $number
+                ]
+            );
 
-        foreach ($array as $value) {
-            if(isset($value['id'])) {
-                array_push($oPData, ['id_order' => $id, 'id_product' => $value['id'], 'quantity' => $value['quan']]);
+            foreach ($array as $value) {
+                if(isset($value['id'])) {
+                    array_push($oPData, ['id_order' => $id, 'id_product' => $value['id'], 'quantity' => $value['quan']]);
 
-                $prods = DB::table('product AS PRO')
-                    ->where('PRO.id', $value['id'])
-                    ->select('PRO.stock')
-                    ->get();
+                    $prods = DB::table('product AS PRO')
+                        ->where('PRO.id', $value['id'])
+                        ->select('PRO.stock')
+                        ->get();
 
-                $query = DB::table('product')
-                    ->where('id', $value['id'])
-                    ->update(['stock' => $prods[0]->stock - $value['quan']]);
+                    $query = DB::table('product')
+                        ->where('id', $value['id'])
+                        ->update(['stock' => $prods[0]->stock - $value['quan']]);
+                }
             }
-        }
 
-        if ($id) {
-            $query = DB::table('order_product')->insert($oPData);
+            if ($id) {
+                $query = DB::table('order_product')->insert($oPData);
 
-            if ($query) {
-                return response()->json(['success' => true, 'order' => ['id' => $id]]);
+                if ($query) {
+                    return response()->json(['success' => true, 'order' => ['id' => $id]]);
+                }
             }
+        } catch (\Throwable $th) {
+            print_r($th->getMessage());
         }
     }
 }

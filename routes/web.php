@@ -13,6 +13,21 @@
 |
 */
 
+// Category
+$router->get('/getCategories', 'CategoryController@all');
+
+// Company
+$router->get('/getCompanies', 'CompanyController@all');
+$router->post('/createCompany', 'CompanyController@store');
+$router->put('/deleteCompany', 'CompanyController@delete');
+
+// Country
+$router->get('/getCountries', 'CountryController@all');
+
+// Inventory
+$router->get('/getInventory', 'InventoryController@all');
+$router->post('/send', 'InventoryController@send');
+
 // Log in
 $router->get('/signin', 'LoginController@getUser');
 $router->post('/signup', 'LoginController@store');
@@ -21,23 +36,11 @@ $router->post('/signup', 'LoginController@store');
 $router->get('/getInventory', 'InventoryController@all');
 $router->post('/send', 'InventoryController@send');
 
-// Company
-$router->get('/getCompanies', 'CompanyController@all');
-$router->post('/createCompany', 'CompanyController@store');
-$router->put('/deleteCompany', 'CompanyController@delete');
+// Order
+$router->get('/getOrders', 'OrderController@all');
+$router->post('/createOrder', 'OrderController@store');
 
 // Product
 $router->get('/getProducts', 'ProductController@all');
 $router->post('/createProduct', 'ProductController@store');
 $router->put('/deleteProduct', 'ProductController@delete');
-
-// Country
-$router->get('/getCountries', 'CountryController@all');
-
-
-// Category
-$router->get('/getCategories', 'CategoryController@all');
-
-// Order
-$router->get('/getOrders', 'OrderController@all');
-$router->post('/createOrder', 'OrderController@store');

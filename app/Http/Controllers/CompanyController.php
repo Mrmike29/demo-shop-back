@@ -24,22 +24,24 @@ class CompanyController extends Controller
 
     // Create new Company
     public function store(Request $request) {
-        $query = DB::table('company')->insert(
-            [
-                'id_country' => $request->country,
-                'NIT' => $request->nit,
-                'NIT-DV' => $request->dv,
-                'name' => $request->name,
-                'address' => $request->address,
-                'phone' => $request->phone,
-                'state' => 'Active'
-            ]
-        );
-
-
-
-        if ($query) {
-            return response()->json(['success' => true]);
+        try {
+            $query = DB::table('company')->insert(
+                [
+                    'id_country' => $request->country,
+                    'NIT' => $request->nit,
+                    'NIT-DV' => $request->dv,
+                    'name' => $request->name,
+                    'address' => $request->address,
+                    'phone' => $request->phone,
+                    'state' => 'Active'
+                ]
+            );
+    
+            if ($query) {
+                return response()->json(['success' => true]);
+            }
+        } catch (\Throwable $th) {
+            print_r($th->getMessage());
         }
     }
 
